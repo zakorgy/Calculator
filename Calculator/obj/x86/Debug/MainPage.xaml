@@ -7,6 +7,43 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:ConnectionId='1' x:Key="LightGrayButtonStyle" x:Name="LightGrayButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="FontSize" Value="48"/>
+        </Style>
+        <Style x:ConnectionId='2' x:Key="GhostWhiteButtonStyle" x:Name="GhostWhiteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="FontSize" Value="48"/>
+        </Style>
+        <Storyboard x:ConnectionId='3' x:Name="SaveButtonAnimation">
+            <ColorAnimation Storyboard.TargetName="ButtonSave"
+                             Storyboard.TargetProperty="Control.Background.Color"
+                             From="IndianRed"
+                             To="CornflowerBlue"
+                             Duration="0:0:1"
+                             AutoReverse="True"
+                             >
+            </ColorAnimation>
+        </Storyboard>
+        <Storyboard x:ConnectionId='4' x:Name="ButtonAnimationStoryBoard">
+            <ColorAnimation x:ConnectionId='5' x:Name="ButtonAnimation"
+                             Storyboard.TargetProperty="Control.Background.Color"
+                             To="SkyBlue"
+                             Duration="0:0:0.1"
+                             RepeatBehavior="3x"
+                             AutoReverse="True"
+                             >
+            </ColorAnimation>
+        </Storyboard>
+    </Page.Resources>
+
     <Grid Background="#FF333333" MaxWidth="600" MaxHeight="800">
         <Grid.ColumnDefinitions>
             <!-- Left padding. -->
@@ -35,8 +72,8 @@
         <Grid.RowDefinitions>
             <!-- Top padding. -->
             <RowDefinition Height="12"/>
-            <!-- Row 1: Output bar. -->
-            <RowDefinition Height="Auto"/>
+            <!-- Row 1: Display. -->
+            <RowDefinition Height="120"/>
             <!-- Row 1-2. padding. -->
             <RowDefinition Height="16"/>
             <!-- Row 2. -->
@@ -60,240 +97,187 @@
             <!-- Bottom padding. -->
             <RowDefinition Height="12"/>
         </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="9" Grid.Column="1" Grid.Row="1">
-            <TextBox x:ConnectionId='25' x:Name="EditorBar"
+        <Grid Grid.ColumnSpan="9" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
+            <TextBox x:ConnectionId='31' x:Name="EditorBar"
                      TextAlignment="Right"
-                     FontSize="100"
+                     FontSize="60"
                      Background="Gray"
                      Foreground="White"
                      BorderThickness="0"
                      FontFamily="Arial"
                      MaxLength="10"
-                     TextWrapping="Wrap">
+                     TextWrapping="Wrap"
+                     Text="{Binding EditorBarContent, Mode=TwoWay}">
             </TextBox>
         </Grid>
+        <Grid Grid.ColumnSpan="9" Grid.Column="1" Grid.Row="1">
+            <TextBox x:ConnectionId='30' x:Name="Computation"
+                     Height="25"
+                     TextAlignment="Right"
+                     FontSize="20"
+                     Background="Gray"
+                     Foreground="White"
+                     BorderThickness="0"
+                     FontFamily="Arial"
+                     MaxLength="20"
+                     TextWrapping="Wrap"
+                     Text="{Binding CachedComputation, Mode=TwoWay}" VerticalAlignment="Top" IsReadOnly="True"/>
+        </Grid>
         <Grid Grid.Column="1" Grid.Row="3">
-            <Button x:ConnectionId='24' x:Name="ButtonMem"
-                    Content="M"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="36"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+            <Button x:ConnectionId='29' x:Name="ButtonSave"
+                    Style ="{StaticResource LightGrayButtonStyle}"
+                                            
+                    Content="S"
+                    Background="IndianRed"
+                    FontSize="36"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="5">
-            <Button x:ConnectionId='23' x:Name="ButtonPre"
-                    Content="±"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="48"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+            <Button x:ConnectionId='28' x:Name="ButtonPre"
+                                        
+                    Style ="{StaticResource LightGrayButtonStyle}"
+                    Content="±"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="7">
-            <Button x:ConnectionId='22' x:Name="ButtonSqr"
-                    Content="√"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="48"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+            <Button x:ConnectionId='27' x:Name="ButtonSqr"
+                                        
+                    Style ="{StaticResource LightGrayButtonStyle}"
+                    Content="√"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="9">
-            <Button x:ConnectionId='21' x:Name="ButtonPercent"
-                    Content="%"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="48"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+            <Button x:ConnectionId='26' x:Name="ButtonPercent"
+                    Style ="{StaticResource LightGrayButtonStyle}"
+                    Content="%"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="11">
-            <Button x:ConnectionId='20' x:Name="ButtonInv"
+            <Button x:ConnectionId='25' x:Name="ButtonInv"
+                                        
+                    Style ="{StaticResource LightGrayButtonStyle}"
                     Content="1/x"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="28"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+                    FontSize="28"/>
         </Grid>
 
         <Grid Grid.Column="3" Grid.Row="3">
-            <Button x:ConnectionId='19' x:Name="ButtonCE"
+            <Button x:ConnectionId='24' x:Name="ButtonCE"
+                                                            
+                    Style ="{StaticResource LightGrayButtonStyle}"
                     Content="CE"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    FontSize="36"
-                    Foreground="LightGray"
-                    Background="Gray"/>
+                    FontSize="36"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="5">
-            <Button x:ConnectionId='18' x:Name="Button7"
-                Content="7"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='23' x:Name="Button7"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="7"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="7">
-            <Button x:ConnectionId='17' x:Name="Button4"
-                Content="4"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='22' x:Name="Button4"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="4"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="9">
-            <Button x:ConnectionId='16' x:Name="Button1"
-                Content="1"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='21' x:Name="Button1"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="1"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="3">
-            <Button x:ConnectionId='15' x:Name="Button0"
-                Content="0"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='20' x:Name="Button0"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="0"/>
         </Grid>
         <Grid Grid.Column="5" Grid.Row="3">
-            <Button x:ConnectionId='14' x:Name="ButtonC"
+            <Button x:ConnectionId='19' x:Name="ButtonC"
+                                                        
+                Style ="{StaticResource LightGrayButtonStyle}"
                 Content="C"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="36"
-                Foreground="LightGray"
-                Background="Gray"/>
+                FontSize="36"/>
         </Grid>
         <Grid Grid.Column="5" Grid.Row="5">
-            <Button x:ConnectionId='13' x:Name="Button8"
-                Content="8"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='18' x:Name="Button8"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="8"/>
         </Grid>
         <Grid Grid.Column="5" Grid.Row="7">
-            <Button x:ConnectionId='12' x:Name="Button5"
-                Content="5"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='17' x:Name="Button5"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="5"/>
         </Grid>
         <Grid Grid.Column="5" Grid.Row="9">
-            <Button x:ConnectionId='11' x:Name="Button2"
-                Content="2"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray">
+            <Button x:ConnectionId='16' x:Name="Button2"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="2">
             </Button>
         </Grid>
 
         <Grid Grid.Column="7" Grid.Row="3">
-            <Button x:ConnectionId='10' x:Name="ButtonDel"
+            <Button x:ConnectionId='15' x:Name="ButtonDel"
+                                    
                 Content="DEL"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="24"
-                Foreground="LightGray"
-                Background="Gray"/>
+                Style ="{StaticResource LightGrayButtonStyle}"
+                FontSize="24"/>
 
         </Grid>
         <Grid Grid.Column="7" Grid.Row="5">
-            <Button x:ConnectionId='9' x:Name="Button9"
-                Content="9"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='14' x:Name="Button9"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="9"/>
 
         </Grid>
         <Grid Grid.Column="7" Grid.Row="7">
-            <Button x:ConnectionId='8' x:Name="Button6"
-                Content="6"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='13' x:Name="Button6"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="6"/>
         </Grid>
         <Grid Grid.Column="7" Grid.Row="9">
-            <Button x:ConnectionId='7' x:Name="Button3"
-                Content="3"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
+            <Button x:ConnectionId='12' x:Name="Button3"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="3"/>
         </Grid>
         <Grid Grid.Column="7" Grid.Row="11">
-            <Button x:ConnectionId='6' x:Name="ButtonDot"
-                Content="."
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
-                Background="Gray"/>
-
+            <Button x:ConnectionId='11' x:Name="ButtonDot"
+                                    
+                Style ="{StaticResource GhostWhiteButtonStyle}"
+                Content="."/>
         </Grid>
 
         <Grid Grid.Column="9" Grid.Row="3">
-            <Button x:ConnectionId='5' x:Name="ButtonDiv"
-                Content="÷"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="LightGray"
-                Background="Gray"/>
+            <Button x:ConnectionId='10' x:Name="ButtonDiv"
+                                    
+                Style ="{StaticResource LightGrayButtonStyle}"
+                Content="÷"/>
 
         </Grid>
         <Grid Grid.Column="9" Grid.Row="5">
-            <Button x:ConnectionId='4' x:Name="ButtonMul"
-                Content="x"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="LightGray"
-                Background="Gray"/>
+            <Button x:ConnectionId='9' x:Name="ButtonMul"
+                                    
+                Style ="{StaticResource LightGrayButtonStyle}"
+                Content="x"/>
         </Grid>
         <Grid Grid.Column="9" Grid.Row="7">
-            <Button x:ConnectionId='3' x:Name="ButtonSub"
-                Content="-"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="LightGray"
-                Background="Gray"/>
+            <Button x:ConnectionId='8' x:Name="ButtonSub"
+                                    
+                Style ="{StaticResource LightGrayButtonStyle}"
+                Content="-"/>
         </Grid>
         <Grid Grid.Column="9" Grid.Row="9">
-            <Button x:ConnectionId='2' x:Name="ButtonAdd"
-                Content="+"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="LightGray"
-                Background="Gray"/>
+            <Button x:ConnectionId='7' x:Name="ButtonAdd"
+                                    
+                Style ="{StaticResource LightGrayButtonStyle}"
+                Content="+"/>
         </Grid>
         <Grid Grid.Column="9" Grid.Row="11">
-            <Button x:ConnectionId='1' x:Name="ButtonEq"
+            <Button x:ConnectionId='6' x:Name="ButtonEq"
+                                    
                 Content="="
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                FontSize="48"
-                Foreground="GhostWhite"
+                Style ="{StaticResource GhostWhiteButtonStyle}"
                 Background="ForestGreen"/>
         </Grid>
     </Grid>

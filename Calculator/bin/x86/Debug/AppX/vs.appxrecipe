@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\ZakorGy\source\repos\Calculator\Calculator\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-04T18:14:00.949</Modified>
+      <Modified>2017-11-26T14:56:46.729</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\ZakorGy\source\repos\Calculator\Calculator\bin\x86\Debug\Calculator.exe">
       <PackagePath>entrypoint\Calculator.exe</PackagePath>
-      <Modified>2017-11-04T18:13:56.252</Modified>
+      <Modified>2017-11-26T14:56:43.952</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ZakorGy\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -535,7 +535,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ZakorGy\source\repos\Calculator\Calculator\bin\x86\Debug\Calculator.xr.xml">
       <PackagePath>Calculator.xr.xml</PackagePath>
-      <Modified>2017-11-04T18:13:55.377</Modified>
+      <Modified>2017-11-26T14:48:49.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -544,11 +544,11 @@
     <AppxPackagedFile Include="C:\Users\ZakorGy\source\repos\Calculator\Calculator\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-04T18:14:00.242</Modified>
+      <Modified>2017-11-26T14:56:46.212</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ZakorGy\source\repos\Calculator\Calculator\bin\x86\Debug\Core\Calculator.exe">
       <PackagePath>Calculator.exe</PackagePath>
-      <Modified>2017-11-04T18:14:00.937</Modified>
+      <Modified>2017-11-26T14:56:46.613</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
